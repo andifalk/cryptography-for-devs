@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: mtls-server
+
+server:
+  port: 8443 # standard port for HTTPS connections
+  ssl:
+    key-store: classpath:server.p12 # the keystore containing the certificate and public/private key pair
+    key-store-password: changeit # the password for opening the keystore
+    key-password: changeit # the password for getting access to private key
+    key-store-type: PKCS12 # the keystore type
+    trust-store: classpath:client-trust.p12
+    trust-store-password: changeit
+    trust-store-type: PKCS12
+    client-auth: need
+  http2:
+    enabled: true # switch on much more performant HTTP/2 protocol
+
+logging:
+  level:
+    web: debug
+    org.springframework.security.web.authentication.preauth.x509: trace
